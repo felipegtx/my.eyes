@@ -26,7 +26,7 @@
 
                                mozaicPieces = mozaicPieces || 10;
                                var mozaicWSize = Math.trunc(img.width / mozaicPieces),
-                                   worker = new Worker("/js/palletone.js"),
+                                   worker = new Worker("palletone.js"),
                                    mozaicHSize = Math.trunc(img.height / mozaicPieces),
                                    imageData = null;
 
