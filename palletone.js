@@ -1,4 +1,4 @@
-self.importScripts("/js/libs/quantize.js");
+self.importScripts("quantize.js");
 
 self.addEventListener("message", function (e) {
 
