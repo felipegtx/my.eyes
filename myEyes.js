@@ -53,8 +53,15 @@
 
                                    _canvasPaletteContext.font = "28px Kaushan Script";
                                    _canvasPaletteContext.lineWidth = 3;
+                                   _canvasPaletteContext.lineJoin = "round";
                                    _canvasPaletteContext.fillStyle = "white";
-                                   _canvasPaletteContext.fillText("Pelos meus olhos", 350, 450);
+
+                                   _canvasPaletteContext.strokeStyle = "black";
+                                   _canvasPaletteContext.strokeText("Nos meus olhos", 350, 450);
+                                   _canvasPaletteContext.fillText("Nos meus olhos", 350, 450);
+
+                                   _canvasPaletteContext.strokeStyle = "black";
+                                   _canvasPaletteContext.strokeText("Você é perfeita em cada pixel", 350, 480);
                                    _canvasPaletteContext.fillText("Você é perfeita em cada pixel", 350, 480);
 
                                    // got LSD?
