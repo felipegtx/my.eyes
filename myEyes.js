@@ -27,7 +27,7 @@
                                mozaicPieces = mozaicPieces || 5;
                                var mozaicHSize = Math.trunc(img.height / mozaicPieces),
                                    mozaicWSize = Math.trunc(img.width / mozaicPieces),
-                                   worker = new Worker(location.protocol + "//" + location.host + "/my-eye/palletone.js"),
+                                   worker = new Worker("palletone.js"),
                                    imageData = null;
 
                                worker.addEventListener("message", function (event) {
