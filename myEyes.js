@@ -48,14 +48,8 @@
                                     
                                    /// Let us draw the predominant color 'pixel' representation...
                                    var color = event.data.palette;
-                                   _canvasPaletteContext.beginPath();
-                                   _canvasPaletteContext.lineWidth = mozaicWSize;
-                                   _canvasPaletteContext.strokeStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
-                                   _canvasPaletteContext.lineJoin = _canvasPaletteContext.lineCap = 'square';
-                                   _canvasPaletteContext.moveTo(event.data.x, event.data.y);
-                                   _canvasPaletteContext.lineTo(event.data.x, event.data.y + 1);
-                                   _canvasPaletteContext.stroke();
-                                   _canvasPaletteContext.closePath();
+                                   _canvasPaletteContext.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+                                   _canvasPaletteContext.fillRect(event.data.x,event.data.y,mozaicWSize, mozaicHSize);
 
                                    /// ... then, setup the message to her <3
                                    _canvasPaletteContext.lineWidth = 3;
