@@ -89,7 +89,6 @@
                                            x += mozaicWSize;
                                            y = 0;
                                        }
-                                       y += mozaicHSize;
                                        
                                        /// For performance/responsivity reasons the predominant color palette information 
                                        /// is calculated by a separated thread
@@ -98,6 +97,7 @@
                                            y: y,
                                            imageData: canvasContext.getImageData(x, y, mozaicWSize, mozaicHSize).data
                                        });
+                                       y += mozaicHSize;
                                        
                                        /// By using this approach instead of a classic for-each execution I avoid blocking the 
                                        /// main thread for high-quality image data
