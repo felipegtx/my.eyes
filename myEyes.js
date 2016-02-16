@@ -58,16 +58,21 @@
                                    _canvasPaletteContext.closePath();
 
                                    /// ... then, setup the message to her <3
-                                   _canvasPaletteContext.font = "28px Kaushan Script";
                                    _canvasPaletteContext.lineWidth = 3;
                                    _canvasPaletteContext.lineJoin = "round";
                                    _canvasPaletteContext.fillStyle = "white";
+                                   _canvasPaletteContext.font = "25px Kaushan Script";
                                    _canvasPaletteContext.strokeStyle = "black";
-                                   _canvasPaletteContext.strokeText("Nos meus olhos", 350, 450);
-                                   _canvasPaletteContext.fillText("Nos meus olhos", 350, 450);
+                                   _canvasPaletteContext.strokeText("Para os meus olhos", 480, 415);
+                                   _canvasPaletteContext.fillText("Para os meus olhos", 480, 415);
+                                   _canvasPaletteContext.font = "55px Kaushan Script";
                                    _canvasPaletteContext.strokeStyle = "black";
-                                   _canvasPaletteContext.strokeText("Você é perfeita em cada pixel", 350, 480);
-                                   _canvasPaletteContext.fillText("Você é perfeita em cada pixel", 350, 480);
+                                   _canvasPaletteContext.strokeText("Perfeita", 450, 460);
+                                   _canvasPaletteContext.fillText("Perfeita", 450, 460);
+                                   _canvasPaletteContext.font = "25px Kaushan Script";
+                                   _canvasPaletteContext.strokeStyle = "black";
+                                   _canvasPaletteContext.strokeText("em cada pixel", 500, 480);
+                                   _canvasPaletteContext.fillText("em cada pixel", 500, 480);
 
                                    // got LSD?
                                    // d.querySelector("body").style.backgroundImage =
