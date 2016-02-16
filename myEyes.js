@@ -10,7 +10,7 @@
         }
 
         var currentImageIndex = 0,
-            images = ["ela.JPG", "ela1.JPG"],
+            images = ["http://felipegtx.github.io/my-eye/ela.JPG", "http://felipegtx.github.io/my-eye/ela1.JPG"],
             canvas = d.querySelector("#cnvImages"),
             timeout = null,
             canvasContext = canvas.getContext("2d"),
@@ -54,11 +54,12 @@
                                    _canvasPaletteContext.font = "28px Georgia";
                                    _canvasPaletteContext.lineWidth = 3;
                                    _canvasPaletteContext.fillStyle = "white";
-                                   _canvasPaletteContext.fillText("pelos.meus.olhos", img.width / 2, img.height - 30);
-                                   _canvasPaletteContext.fillText("você.é.perfeita.em.todo.pixels", img.width / 2, img.height);
+                                   _canvasPaletteContext.fillText("pelos.meus.olhos", img.width / 3, img.height - 30);
+                                   _canvasPaletteContext.fillText("você.é.perfeita.em.cada.pixel", img.width / 3, img.height);
 
-                                   d.querySelector("body").style.backgroundImage =
-                                       "url(" + _canvasPalette.toDataURL("image/png") + ")";
+                                   // got LSD?
+                                   // d.querySelector("body").style.backgroundImage =
+                                   //   "url(" + _canvasPalette.toDataURL("image/png") + ")";
 
                                }, false);
 
