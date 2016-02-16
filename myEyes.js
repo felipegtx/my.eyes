@@ -51,11 +51,11 @@
                                    _canvasPaletteContext.stroke();
                                    _canvasPaletteContext.closePath();
 
-                                   _canvasPaletteContext.font = "28px Georgia";
+                                   _canvasPaletteContext.font = "28px Kaushan Script";
                                    _canvasPaletteContext.lineWidth = 3;
                                    _canvasPaletteContext.fillStyle = "white";
-                                   _canvasPaletteContext.fillText("pelos.meus.olhos", 350, 450);
-                                   _canvasPaletteContext.fillText("você.é.perfeita.em.cada.pixel", 350, 480);
+                                   _canvasPaletteContext.fillText("Pelos meus olhos", 350, 450);
+                                   _canvasPaletteContext.fillText("Você é perfeita em cada pixel", 350, 480);
 
                                    // got LSD?
                                    // d.querySelector("body").style.backgroundImage =
