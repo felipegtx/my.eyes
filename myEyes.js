@@ -10,7 +10,7 @@
         }
 
         var currentImageIndex = 0,
-            images = ["Tulips.jpg", "Desert.jpg"],
+            images = ["ela.JPG", "ela1.JPG"],
             canvas = d.querySelector("#cnvImages"),
             timeout = null,
             canvasContext = canvas.getContext("2d"),
@@ -24,15 +24,17 @@
                             */
                            blinkTo: function (img, mozaicPieces, then) {
 
-                               mozaicPieces = mozaicPieces || 10;
-                               var mozaicWSize = Math.trunc(img.width / mozaicPieces),
-                                   worker = new Worker("palletone.js"),
-                                   mozaicHSize = Math.trunc(img.height / mozaicPieces),
+                               mozaicPieces = mozaicPieces || 5;
+                               var mozaicHSize = Math.trunc(img.height / mozaicPieces),
+                                   mozaicWSize = Math.trunc(img.width / mozaicPieces),
+                                   worker = new Worker(location.protocol + "//" + location.host + "/my-eye/palletone.js"),
                                    imageData = null;
 
                                worker.addEventListener("message", function (event) {
 
                                    if (event.data === "DONE") {
+
+                                       /// If the next iteration exists
                                        if (typeof then === "function") {
                                            then();
                                        }
@@ -41,24 +43,39 @@
 
                                    var color = event.data.palette;
                                    _canvasPaletteContext.beginPath();
-                                   _canvasPaletteContext.rect(event.data.x, event.data.y,
-                                       mozaicWSize, mozaicHSize);
-                                   _canvasPaletteContext.fillStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
-                                   _canvasPaletteContext.lineWidth = 1;
+                                   _canvasPaletteContext.lineWidth = mozaicWSize;
                                    _canvasPaletteContext.strokeStyle = "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
-                                   _canvasPaletteContext.globalAlpha = 1;
-                                   _canvasPaletteContext.fill();
+                                   _canvasPaletteContext.lineJoin = _canvasPaletteContext.lineCap = 'square';
+                                   _canvasPaletteContext.moveTo(event.data.x, event.data.y);
+                                   _canvasPaletteContext.lineTo(event.data.x, event.data.y + 1);
                                    _canvasPaletteContext.stroke();
+                                   _canvasPaletteContext.closePath();
 
                                }, false);
 
-                               for (var y = 0; y < img.height; y += mozaicHSize) {
-                                   for (var x = 0; x < img.width; x += mozaicWSize) {
-                                       imageData = canvasContext.getImageData(x, y, mozaicWSize, mozaicHSize).data;
-                                       worker.postMessage({ x: x, y: y, imageData: imageData });
+                               var x = 0, y = 0;
+                               function requestChain() {
+                                   if (x <= img.width) {
+                                       if (y > img.height) {
+                                           x += mozaicWSize;
+                                           y = 0;
+                                       }
+                                       y += mozaicHSize;
+                                       worker.postMessage({
+                                           x: x,
+                                           y: y,
+                                           imageData: canvasContext.getImageData(x, y, mozaicWSize, mozaicHSize).data
+                                       });
+                                       $this.requestAnimationFrame(requestChain);
+                                   }
+                                   else {
+                                       worker.postMessage("DONE");
                                    }
                                }
-                               worker.postMessage("DONE");
+
+                               /// This implementation frees the main thread by using the request animation frame to schedule new
+                               /// pixel color information
+                               requestChain();
 
                                return _this;
                            }
@@ -92,20 +109,21 @@
             canvas.style.display = "none";
             loadImageOntoCanvas(images[currentImageIndex++], function (img) {
                 myEyes
-                    .blinkTo(img)
-                    .blinkTo(img, 30)
-                    .blinkTo(img, 60)
-                    .blinkTo(img, 90)
-                    .blinkTo(img, 120, function () {
-                        canvas.style.display = "";
-                        if (timeout !== null) {
-                            $this.clearTimeout(timeout);
-                        }
-                        timeout = $this.setTimeout(loadImage, 1000);
+                    .blinkTo(img, 10, function () {
+                        myEyes.blinkTo(img, 25, function () {
+                            myEyes.blinkTo(img, 50, function () {
+                                myEyes.blinkTo(img, 200, function () {
+                                    canvas.style.display = "";
+                                    if (timeout !== null) {
+                                        $this.clearTimeout(timeout);
+                                    }
+                                    timeout = $this.setTimeout(loadImage, 1000);
+                                });
+                            });
+                        });
                     });
             });
         }
-
         loadImage();
     });
 
