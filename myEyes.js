@@ -115,19 +115,41 @@
             if (currentImageIndex >= images.length) {
                 currentImageIndex = 0;
             }
-            canvas.style.display = "none";
             loadImageOntoCanvas(images[currentImageIndex++], function (img) {
                 myEyes
                     .blinkTo(img, 10, function () {
                         myEyes.blinkTo(img, 25, function () {
                             myEyes.blinkTo(img, 50, function () {
-                                myEyes.blinkTo(img, 200, function () {
-                                    canvas.style.display = "";
+
+                                canvas.style.display = "";
+
+                                var currentOpacity = 0.1;
+                                canvas.style.opacity = currentOpacity;
+                                function fadeIn() {
                                     if (timeout !== null) {
                                         $this.clearTimeout(timeout);
                                     }
-                                    timeout = $this.setTimeout(loadImage, 1000);
-                                });
+                                    if (currentOpacity <= 1) {
+                                        canvas.style.opacity = (currentOpacity += 0.1);
+                                        timeout = $this.setTimeout(fadeIn, 100);
+                                    } else {
+                                        timeout = $this.setTimeout(fadeOut, 500);
+                                    }
+                                }
+
+                                function fadeOut() {
+                                    if (timeout !== null) {
+                                        $this.clearTimeout(timeout);
+                                    }
+                                    if (currentOpacity >= 0) {
+                                        canvas.style.opacity = (currentOpacity -= 0.1);
+                                        timeout = $this.setTimeout(fadeOut, 100);
+                                    } else {
+                                        loadImage();
+                                    }
+                                }
+
+                                fadeIn();
                             });
                         });
                     });
