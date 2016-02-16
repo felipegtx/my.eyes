@@ -71,8 +71,8 @@
                                    _canvasPaletteContext.fillText("Perfeita", 450, 460);
                                    _canvasPaletteContext.font = "25px Kaushan Script";
                                    _canvasPaletteContext.strokeStyle = "black";
-                                   _canvasPaletteContext.strokeText("em cada pixel", 500, 480);
-                                   _canvasPaletteContext.fillText("em cada pixel", 500, 480);
+                                   _canvasPaletteContext.strokeText("em todos os pixels", 500, 480);
+                                   _canvasPaletteContext.fillText("em todos os pixels", 500, 480);
 
                                    // got LSD?
                                    // d.querySelector("body").style.backgroundImage =
