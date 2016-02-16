@@ -1,4 +1,3 @@
-# my.eyes
-A nerdy :heart: declaration 
-
-This is a gift for [my Girl](http://felipegtx.github.io/my-eye/index.html).
+# In my eyes
+## Every `pixel` counts
+### Every `color` *is* important
