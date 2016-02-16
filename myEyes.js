@@ -7,10 +7,15 @@
 
         if (!$this.Worker) {
             alert("Woops, your browser does not support this app :(");
+            return;
         }
 
         var currentImageIndex = 0,
-            images = ["http://felipegtx.github.io/my-eye/ela.JPG", "http://felipegtx.github.io/my-eye/ela1.JPG"],
+            images = [
+                /// Just her.
+                "http://felipegtx.github.io/my-eye/ela.JPG", 
+                "http://felipegtx.github.io/my-eye/ela1.JPG"
+            ],
             canvas = d.querySelector("#cnvImages"),
             timeout = null,
             canvasContext = canvas.getContext("2d"),
@@ -40,7 +45,8 @@
                                        }
                                        return;
                                    }
-
+                                    
+                                   /// Let us draw the predominant color 'pixel' representation...
                                    var color = event.data.palette;
                                    _canvasPaletteContext.beginPath();
                                    _canvasPaletteContext.lineWidth = mozaicWSize;
@@ -51,15 +57,14 @@
                                    _canvasPaletteContext.stroke();
                                    _canvasPaletteContext.closePath();
 
+                                   /// ... then, setup the message to her <3
                                    _canvasPaletteContext.font = "28px Kaushan Script";
                                    _canvasPaletteContext.lineWidth = 3;
                                    _canvasPaletteContext.lineJoin = "round";
                                    _canvasPaletteContext.fillStyle = "white";
-
                                    _canvasPaletteContext.strokeStyle = "black";
                                    _canvasPaletteContext.strokeText("Nos meus olhos", 350, 450);
                                    _canvasPaletteContext.fillText("Nos meus olhos", 350, 450);
-
                                    _canvasPaletteContext.strokeStyle = "black";
                                    _canvasPaletteContext.strokeText("Você é perfeita em cada pixel", 350, 480);
                                    _canvasPaletteContext.fillText("Você é perfeita em cada pixel", 350, 480);
@@ -73,16 +78,24 @@
                                var x = 0, y = 0;
                                function requestChain() {
                                    if (x <= img.width) {
+                                       
+                                       /// Equivalent to moving forward on our loop
                                        if (y > img.height) {
                                            x += mozaicWSize;
                                            y = 0;
                                        }
                                        y += mozaicHSize;
+                                       
+                                       /// For performance/responsivity reasons the predominant color palette information 
+                                       /// is calculated by a separated thread
                                        worker.postMessage({
                                            x: x,
                                            y: y,
                                            imageData: canvasContext.getImageData(x, y, mozaicWSize, mozaicHSize).data
                                        });
+                                       
+                                       /// By using this approach instead of a classic for-each execution I avoid blocking the 
+                                       /// main thread for high-quality image data
                                        $this.requestAnimationFrame(requestChain);
                                    }
                                    else {
@@ -91,7 +104,7 @@
                                }
 
                                /// This implementation frees the main thread by using the request animation frame to schedule new
-                               /// pixel color information
+                               /// pixel color information gattering
                                requestChain();
 
                                return _this;
@@ -120,25 +133,32 @@
          * is fully visible before starting over again (until the end of times)
          */
         function loadImage() {
+            
             if (currentImageIndex >= images.length) {
                 currentImageIndex = 0;
             }
+            
             loadImageOntoCanvas(images[currentImageIndex++], function (img) {
                 myEyes.blinkTo(img, 10, function () {
                     myEyes.blinkTo(img, 50, function () {
 
+                        /// Show the current image...
                         canvas.style.display = "";
-
+                        
+                        /// ... just a little bit 
                         var currentOpacity = 0.1;
                         canvas.style.opacity = currentOpacity;
+                        
                         function fadeIn() {
                             if (timeout !== null) {
                                 $this.clearTimeout(timeout);
                             }
                             if (currentOpacity <= 1) {
                                 canvas.style.opacity = (currentOpacity += 0.1);
+                                /// Fade in the current image...
                                 timeout = $this.setTimeout(fadeIn, 100);
                             } else {
+                                /// ... then fade out ...
                                 timeout = $this.setTimeout(fadeOut, 500);
                             }
                         }
@@ -151,10 +171,13 @@
                                 canvas.style.opacity = (currentOpacity -= 0.1);
                                 timeout = $this.setTimeout(fadeOut, 100);
                             } else {
+                                
+                                /// ... move on to the next pretty pic! (:
                                 loadImage();
                             }
                         }
-
+                        
+                        /// Run the fade-in/out effect chain
                         fadeIn();
                     });
                 });
@@ -162,5 +185,4 @@
         }
         loadImage();
     });
-
 })(this, document);
