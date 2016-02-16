@@ -15,7 +15,14 @@
             overflow-y: hidden;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+    <script>
+      WebFont.load({
+        google: {
+          families: ['Kaushan Script']
+        }
+      });
+    </script>
 </head>
 <body>
     <canvas id="cnvPalette" width="800" height="600" style="position: absolute; top: 0; left: 0;z-index: 1"></canvas>
