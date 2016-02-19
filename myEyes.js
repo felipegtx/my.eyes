@@ -12,9 +12,8 @@
 
         var currentImageIndex = 0,
             images = [
-                /// Just her.
-                "http://felipegtx.github.io/my-eye/ela.JPG", 
-                "http://felipegtx.github.io/my-eye/ela1.JPG"
+                /// here is were you put the images of your SO
+                "someImage.jpg"
             ],
             canvas = d.querySelector("#cnvImages"),
             timeout = null,
